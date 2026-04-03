@@ -4,8 +4,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-.font-gamja-flower {
-  font-family: var(--font-gamja-flower), cursive;
+.font-comic-relief {
+  font-family: var(--font-comic-relief), cursive;
 }
 
 @theme inline {

@@ -52,7 +52,6 @@ const Navbar = () => {
         className="relative shadow-[0_4px_32px_rgba(0,0,0,0.10)] border border-black/5 pointer-events-auto overflow-hidden"
       >
         <div className="flex items-center justify-between px-5 h-15">
-          {/* Logo + wordmark */}
           <div className="flex items-center  shrink-0">
             <Image
               src="/assets/logo (2).png"
@@ -68,7 +67,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -6 }}
                   transition={{ duration: 0.2 }}
-                  className="font-gamja-flower text-[#1a1a1a] text-3xl mt-2 "
+                  className="font-comic-relief text-[#1a1a1a] text-3xl mt-2 "
                 >
                   othna
                 </motion.span>
@@ -113,66 +112,75 @@ const Navbar = () => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="overflow-hidden"
             >
-              <div className="px-10 pb-8 pt-2 grid grid-cols-5 gap-x-4">
-                {/* Left links */}
-                <div className="flex flex-col gap-5 font-gamja-flower">
-                  {leftLinks.map((item, i) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.05 + i * 0.04 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className="text-[#1a1a1a] text-2xl font-normal hover:text-[#344B94] transition-colors"
+              {/* CHANGE: Switched to flex-col on mobile, md:grid on desktop.
+          Changed px-10 to px-6 on mobile for better spacing.
+      */}
+              <div className="px-6 md:px-10 pb-8 pt-2 flex flex-col md:grid md:grid-cols-5 gap-y-8 md:gap-x-4">
+                {/* Links Wrapper: Groups links together on mobile */}
+                <div className="flex justify-between md:contents">
+                  {/* Left links */}
+                  <div className="flex flex-col gap-5 font-comic-relief">
+                    {leftLinks.map((item, i) => (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.05 + i * 0.04 }}
                       >
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className="text-[#1a1a1a] text-base md:text-xl font-normal hover:text-[#344B94] transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Right links */}
+                  <div className="flex flex-col gap-5 font-comic-relief md:ml-8">
+                    {rightLinks.map((item, i) => (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 + i * 0.04 }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className="text-[#1a1a1a] text-base md:text-xl font-normal hover:text-[#344B94] transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="flex flex-col gap-5 font-gamja-flower ml-8">
-                  {rightLinks.map((item, i) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.08 + i * 0.04 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className="text-[#1a1a1a] text-2xl font-normal hover:text-[#344B94] transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="col-span-1" />
+                {/* Spacer: Only visible on desktop to maintain grid alignment */}
+                <div className="hidden md:block col-span-1" />
 
-                {/* Featured image */}
+                {/* Featured image: Now stacks naturally on mobile */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="relative group overflow-hidden rounded-2xl bg-gray-100 col-span-2"
+                  className="relative group overflow-hidden rounded-2xl bg-gray-100 md:col-span-2"
                   style={{
                     width: "100%",
-                    aspectRatio: "2/1.1", // Slightly taller often looks more "tucked in"
+                    aspectRatio: "16/9",
                   }}
                 >
                   <Image
                     src="https://i.pinimg.com/control1/1200x/a1/88/d7/a188d755f52129e415edac7a121116eb.jpg"
                     alt="Featured Project"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105  transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white font-gamja-flower text-lg">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-white font-gamja text-base md:text-lg">
                     Featured Project
                   </div>
                 </motion.div>

@@ -23,19 +23,19 @@ export default function Hero() {
         delay={0.2}
       />
       <FloatingCard
-        img="/assets/!-icon.png"
+        img="/assets/macro.png"
         className="top-6 right-4 md:top-36 md:right-[15%] rotate-12"
         size="sm"
         delay={0.4}
       />
       <FloatingCard
-        img="https://i.pinimg.com/736x/d0/d7/fd/d0d7fd2a9856cf1961b8c3ea10420539.jpg"
+        img="/assets/!-icon.png"
         className="hidden md:block bottom-24 md:left-[28%] rotate-[5deg]"
         size="sm"
         delay={0.6}
       />
       <FloatingCard
-        img="https://i.pinimg.com/control1/1200x/32/0e/b1/320eb184eec2fde3880844f2f16bd0be.jpg"
+        img="/assets/tablet.png"
         className="bottom-32 right-4 md:bottom-40 md:right-[22%] rotate-[-8deg]"
         size="md"
         delay={0.8}
@@ -44,24 +44,29 @@ export default function Hero() {
       {/* Main Text Content */}
       <div className="text-center z-10 max-w-4xl px-4 flex flex-col items-center">
         <motion.h1
-          // leading-[0.8] makes the lines hug each other
-          className="font-gamja-flower text-[55px] sm:text-[75px] md:text-[95px] lg:text-[115px] leading-[0.8] text-[#1a2b56] mb-4 flex flex-col items-center"
+          className="font-comic-relief text-5xl sm:text-[75px] md:text-[95px] lg:text-[100px] leading-[1.1] sm:leading-[0.8] text-[#1a2b56] mb-4 flex flex-col items-center text-center px-4"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="block">Developer &</span>
 
-          <div className="flex items-center justify-center">
+          {/* The 'h-[1.2em]' is relative to the font size, 
+    so it scales automatically from mobile to desktop.
+  */}
+          <div className="relative flex items-center justify-center overflow-hidden h-[1.5em] py-1 w-full">
             <RotatingText
               texts={["Designer", "Editor"]}
               staggerFrom={"last"}
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              staggerDuration={0.035}
+              transition={{
+                type: "spring",
+                damping: 35,
+                stiffness: 300,
+              }}
               rotationInterval={2500}
             />
           </div>
@@ -77,7 +82,7 @@ export default function Hero() {
           onClick={scrollToSpinner}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-[#091f5b] font-gamja-flower text-white px-8 py-3 rounded-full font-medium text-2xl flex items-center gap-3 shadow-xl cursor-pointer"
+          className="bg-[#091f5b] font-comic-relief text-white px-8 py-3 rounded-full font-medium text-xl flex items-center gap-3 shadow-xl cursor-pointer"
         >
           Let&apos;s Go!
         </motion.button>
@@ -115,24 +120,26 @@ function FloatingCard({
   size?: "sm" | "md" | "lg";
 }) {
   const sizeClasses = {
-    sm: "w-16 sm:w-24 md:w-32",
-    md: "w-24 sm:w-36 md:w-48",
-    lg: "w-28 sm:w-44 md:w-56",
+    sm: "w-14 sm:w-20 md:w-28",
+    md: "w-20 sm:w-28 md:w-40",
+    lg: "w-24 sm:w-36 md:w-48",
   };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: [0, -12, 0] }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: [0, -10, 0] }}
       transition={{
         opacity: { delay, duration: 1 },
-        y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay },
+        y: { repeat: Infinity, duration: 6, ease: "easeInOut", delay },
       }}
-      className={`absolute ${sizeClasses[size]} aspect-3/4 rounded-[24px] overflow-hidden shadow-2xl ${className}`}
+      // Removed: shadow-2xl, rounded-[24px], aspect-3/4, overflow-hidden
+      className={`absolute ${sizeClasses[size]} pointer-events-none z-0 ${className}`}
     >
       <img
         src={img}
-        className="w-full h-full object-cover grayscale-[0.1] hover:grayscale-0 transition-all duration-700"
-        alt="Work"
+        className="w-full h-auto object-contain drop-shadow-md" // Added drop-shadow for subtle depth
+        alt="Floating decoration"
       />
     </motion.div>
   );
