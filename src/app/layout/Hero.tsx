@@ -68,7 +68,7 @@ export default function Hero() {
         </motion.h1>
 
         {/* Reduced mb-10 to mb-6 to bring the button closer */}
-        <motion.p className="text-gray-600 text-lg mb-6 max-w-md">
+        <motion.p className="text-gray-600 font-mono text-base mb-6 max-w-md">
           A fun and simple decision maker to playfully navigate life&apos;s
           choices.
         </motion.p>
@@ -77,7 +77,7 @@ export default function Hero() {
           onClick={scrollToSpinner}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-[#091f5b] font-gamja text-white px-8 py-3 rounded-full font-medium text-2xl flex items-center gap-3 shadow-xl cursor-pointer"
+          className="bg-[#091f5b] font-gamja-flower text-white px-8 py-3 rounded-full font-medium text-2xl flex items-center gap-3 shadow-xl cursor-pointer"
         >
           Let&apos;s Go!
         </motion.button>

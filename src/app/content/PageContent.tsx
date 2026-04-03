@@ -3,6 +3,8 @@
 import SmoothScroll from "@/src/components/SmoothScroll";
 import Header from "../layout/Header";
 import Hero from "../layout/Hero";
+import Stack from "../roadMap/StackSection";
+import ExperienceRoadmap from "../roadMap/WorkExperience";
 
 export default function PageContent() {
   return (
@@ -10,6 +12,8 @@ export default function PageContent() {
       <div className="bg-[#FAFAFA] min-h-[200vh] text-white selection:bg-blue-500/30">
         <Header />
         <Hero />
+        <Stack />
+        <ExperienceRoadmap />
       </div>
     </SmoothScroll>
   );
