@@ -1,3 +1,9 @@
+import PageContent from "./content/PageContent";
+
 export default function Home() {
-  return <div>hello world</div>;
+  return (
+    <div>
+      <PageContent />
+    </div>
+  );
 }

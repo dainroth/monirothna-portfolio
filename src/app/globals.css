@@ -4,6 +4,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.font-gamja-flower {
+  font-family: var(--font-gamja-flower), cursive;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
