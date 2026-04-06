@@ -26,7 +26,7 @@ const ExperienceRoadmap = () => {
     <section className="py-12 bg-[#FCF9F3] relative z-10">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="font-gamja-flower text-4xl md:text-5xl text-[#1a2b56] mb-2">
+          <h2 className="font-comic-relief text-4xl md:text-5xl text-[#1a2b56] mb-2">
             Work Experience
           </h2>
           <div className="h-1 w-16 bg-[#1a2b56] mx-auto rounded-full" />
@@ -64,10 +64,10 @@ const ExperienceRoadmap = () => {
                   <h3 className="text-lg md:text-xl font-bold text-[#2D2D2D] tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="font-bold text-[#1a2b56] text-base">
+                  <p className="font-semibold font-comic-relief text-[#1a2b56] text-base">
                     {item.company}
                   </p>
-                  <p className="text-gray-500 leading-snug text-sm pt-1">
+                  <p className="text-gray-500 font-comic-relief leading-snug text-sm pt-1">
                     {item.description}
                   </p>
                 </div>
