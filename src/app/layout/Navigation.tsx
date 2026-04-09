@@ -173,7 +173,7 @@ const Navbar = () => {
                   }}
                 >
                   <Image
-                    src="https://i.pinimg.com/control1/1200x/a1/88/d7/a188d755f52129e415edac7a121116eb.jpg"
+                    src="/assets/here-my-id.jpg"
                     alt="Featured Project"
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"

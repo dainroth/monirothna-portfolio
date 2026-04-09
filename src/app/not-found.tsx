@@ -26,11 +26,11 @@ export default function NotFound() {
           </span>
         </motion.div>
 
-        <h2 className=" text-5xl font-gamja-flower md:text-7xl text-[#1a2b56] mb-4">
+        <h2 className=" text-5xl font-comic-relief md:text-7xl text-[#1a2b56] mb-4">
           Whoops! You &apos;re lost.
         </h2>
 
-        <p className="text-gray-500 font-gamja-flower max-w-md mb-10 text-xl leading-relaxed">
+        <p className="text-gray-500 font-comic-relief max-w-md mb-10 text-xl leading-relaxed">
           The page you&apos;re looking for has wandered off into the digital
           void. Let&apos;s get you back to the studio.
         </p>
@@ -40,7 +40,7 @@ export default function NotFound() {
           <motion.button
             whileHover={{ scale: 0.95 }}
             whileTap={{ scale: 0.8 }}
-            className="px-10 py-4 bg-[#1a2b56] text-[#FCF9F3] rounded-full font-gamja-flower text-2xl shadow-[0_10px_20px_rgba(26,43,86,0.2)] transition-all cursor-pointer"
+            className="px-10 py-4 bg-[#1a2b56] text-[#FCF9F3] rounded-full font-comic-relief text-xl shadow-[0_10px_20px_rgba(26,43,86,0.2)] transition-all cursor-pointer"
           >
             Back to Home
           </motion.button>

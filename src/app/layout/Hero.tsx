@@ -1,22 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import RotatingText from "@/src/components/RotatingText";
 import { motion } from "framer-motion";
 
 export default function Hero() {
   const scrollToSpinner = () => {
     const element = document.getElementById("spinner");
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   return (
     <section className="relative min-h-[85vh] w-full bg-[#FAFAFA] flex flex-col items-center justify-center overflow-hidden pb-10">
-      {/* FLOATING CARDS: Repositioned to hug the text more closely */}
       <FloatingCard
         img="https://i.pinimg.com/736x/a0/44/70/a044704b725888b51b1eb5a978bf0d77.jpg"
         className="top-12 left-4 rounded-2xl md:top-24 md:left-[18%] rotate-[-10deg]"
@@ -41,54 +36,52 @@ export default function Hero() {
         delay={0.8}
       />
 
-      {/* Main Text Content */}
-      <div className="text-center z-10 max-w-4xl px-4 flex flex-col items-center">
-        <motion.h1
-          className="font-comic-relief text-5xl sm:text-[75px] md:text-[95px] lg:text-[100px] leading-[1.1] sm:leading-[0.8] text-[#1a2b56] mb-4 flex flex-col items-center text-center px-4"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      {/* Main content */}
+      <div className="text-center z-10 max-w-3xl px-4 flex flex-col items-center">
+        <motion.p
+          className="font-mono text-xs tracking-[0.2em] text-[#aaa9a5] uppercase mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <span className="block">Developer &</span>
-
-          {/* The 'h-[1.2em]' is relative to the font size, 
-    so it scales automatically from mobile to desktop.
-  */}
-          <div className="relative flex items-center justify-center overflow-hidden h-[1.5em] py-1 w-full">
-            <RotatingText
-              texts={["Designer", "Editor"]}
-              staggerFrom={"last"}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-100%", opacity: 0 }}
-              staggerDuration={0.035}
-              transition={{
-                type: "spring",
-                damping: 35,
-                stiffness: 300,
-              }}
-              rotationInterval={2500}
-            />
-          </div>
-        </motion.h1>
-
-        {/* Reduced mb-10 to mb-6 to bring the button closer */}
-        <motion.p className="text-gray-600 font-mono text-base mb-6 max-w-md">
-          A fun and simple decision maker to playfully navigate life&apos;s
-          choices.
+          Based in Cambodia
         </motion.p>
 
-        <motion.button
-          onClick={scrollToSpinner}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-          className="bg-[#091f5b] font-comic-relief text-white px-8 py-3 rounded-full font-medium text-xl flex items-center gap-3 shadow-xl cursor-pointer"
+        <motion.h1
+          className="font-comic-relief text-5xl sm:text-[70px] md:text-[88px] lg:text-[96px] leading-[1.05] text-[#1a2b56] mb-6 tracking-tight"
+          initial={{ y: 24, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
-          Let&apos;s Go!
-        </motion.button>
+          Developer
+          <br />
+          <span className="text-[#C4763A]">&</span> Designer
+        </motion.h1>
+
+        <motion.p
+          className="text-[#888885] text-base leading-relaxed max-w-sm"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          University student specializing in building performant, well-crafted
+          web applications.
+        </motion.p>
+
+        <motion.div
+          className="mt-8 flex items-center gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          <span className="w-2 h-2 rounded-full bg-[#5AB870] inline-block" />
+          <span className="text-xs font-mono text-[#aaa9a5] tracking-widest uppercase">
+            Open to work
+          </span>
+        </motion.div>
       </div>
 
-      {/* scroll indicator */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
@@ -99,10 +92,10 @@ export default function Hero() {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
         onClick={scrollToSpinner}
       >
-        <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-gray-400">
+        <span className="text-[9px] font-mono uppercase tracking-[0.4em] text-[#bbb]">
           Scroll
         </span>
-        <div className="w-px h-10 bg-linear-to-b from-gray-300 to-transparent" />
+        <div className="w-px h-10 bg-linear-to-b from-[#ccc] to-transparent" />
       </motion.div>
     </section>
   );
@@ -133,12 +126,12 @@ function FloatingCard({
         opacity: { delay, duration: 1 },
         y: { repeat: Infinity, duration: 6, ease: "easeInOut", delay },
       }}
-      // Removed: shadow-2xl, rounded-[24px], aspect-3/4, overflow-hidden
       className={`absolute ${sizeClasses[size]} pointer-events-none z-0 ${className}`}
     >
       <img
         src={img}
-        className="w-full h-auto object-contain drop-shadow-md" // Added drop-shadow for subtle depth
+        className="w-full h-auto object-contain"
+        style={{ filter: "saturate(0.85) sepia(0.08)" }}
         alt="Floating decoration"
       />
     </motion.div>

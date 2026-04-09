@@ -6,6 +6,8 @@ import Hero from "../layout/Hero";
 import Stack from "../roadMap/StackSection";
 import ExperienceRoadmap from "../roadMap/WorkExperience";
 import MobileIntroOverlay from "../showIntro/IntroOverlay";
+import Projects from "../roadMap/ProjectExperience";
+import About from "../aboutMe/AboutMe";
 
 export default function PageContent() {
   return (
@@ -14,8 +16,10 @@ export default function PageContent() {
         <MobileIntroOverlay />
         <Header />
         <Hero />
+        <About />
         <Stack />
         <ExperienceRoadmap />
+        <Projects />
       </div>
     </SmoothScroll>
   );

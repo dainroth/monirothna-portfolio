@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
-import {
-  Comic_Relief,
-  Gamja_Flower,
-  Geist,
-  Geist_Mono,
-  Indie_Flower,
-  Inter,
-} from "next/font/google";
+import { Comic_Relief, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/src/lib/utils";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
