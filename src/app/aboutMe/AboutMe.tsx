@@ -46,7 +46,7 @@ export default function About() {
           {/* swap with: <img src="/assets/me.jpg" className="w-full h-full object-cover" alt="Sakhan" /> */}
           <div className="w-full h-full bg-[#e8e2d8] flex items-center justify-center">
             <img
-              src="/assets/me.jpg"
+              src="/assets/me.webp"
               alt="Sakhan"
               className="w-full h-full object-cover"
             />
@@ -55,7 +55,7 @@ export default function About() {
 
         {/* Scattered image: anime photo — top left */}
         <FloatImg
-          src="https://i.pinimg.com/736x/bd/7b/10/bd7b10545f111b9065c8ceee5fbed21c.jpg"
+          src="/assets/laptop.webp"
           style={{ top: "4%", left: "2%", width: 110 }}
           rotate={-8}
           delay={0.2}
@@ -64,7 +64,7 @@ export default function About() {
 
         {/* Scattered image: macro — top right */}
         <FloatImg
-          src="/assets/macro.png"
+          src="/assets/macro.webp"
           style={{ top: "2%", right: "4%", width: 90 }}
           rotate={10}
           delay={0.35}
@@ -72,18 +72,10 @@ export default function About() {
 
         {/* Scattered image: tablet — right */}
         <FloatImg
-          src="/assets/tablet.png"
+          src="/assets/tablet (1).webp"
           style={{ top: "38%", right: "2%", width: 110 }}
           rotate={-6}
           delay={0.5}
-        />
-
-        {/* Scattered image: exclamation — bottom left */}
-        <FloatImg
-          src="/assets/!-icon.png"
-          style={{ bottom: "12%", left: "8%", width: 44 }}
-          rotate={5}
-          delay={0.45}
         />
 
         {/* Scattered image: macro again — bottom right area */}
@@ -107,7 +99,7 @@ export default function About() {
             Open to work — let&apos;s build something great.
           </p>
           <a
-            href="mailto:your@email.com"
+            href="mailto:rothanaemily@gmail.com"
             className="font-mono text-[10px] tracking-wide text-[#C4763A] underline underline-offset-2 hover:opacity-70 transition-opacity"
           >
             Get in touch →

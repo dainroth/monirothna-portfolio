@@ -31,6 +31,13 @@ const folders: {
   },
 ];
 
+interface ProjectCardProps {
+  name: string;
+  desc: string;
+  tags: string[];
+  category: string;
+}
+
 const projects: Record<
   FolderKey,
   { name: string; desc: string; tags: string[] }[]
@@ -78,35 +85,37 @@ const projects: Record<
   ],
 };
 
-function ProjectCard({
-  name,
-  desc,
-  tags,
-  category,
-}: {
-  name: string;
-  desc: string;
-  tags: string[];
-  category: string;
-}) {
+function ProjectCard({ name, desc, tags, category }: ProjectCardProps) {
   return (
-    <div className="bg-white border border-[#e0dbd3]/60 rounded-2xl p-5 hover:border-[#C4763A] transition-colors duration-150">
-      <p className="font-mono text-[9px] tracking-widest uppercase text-[#C4763A] mb-2.5">
-        {category}
+    <motion.div
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className="bg-white border border-[#e0dbd3]/80 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:border-[#C4763A]/30 transition-all duration-300 group h-full flex flex-col"
+    >
+      <div className="flex justify-between items-start mb-4">
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#C4763A] bg-[#C4763A]/5 px-2 py-1 rounded">
+          {category}
+        </span>
+      </div>
+
+      <h3 className="font-medium text-[#1a2b56] text-lg mb-2 group-hover:text-[#C4763A] transition-colors">
+        {name}
+      </h3>
+
+      <p className="text-[13px] text-[#666] leading-relaxed mb-6 grow">
+        {desc}
       </p>
-      <p className="font-medium text-[#1c1c1a] text-[15px] mb-1.5">{name}</p>
-      <p className="text-[12px] text-[#999] leading-relaxed mb-4">{desc}</p>
-      <div className="flex flex-wrap gap-1.5">
-        {tags.map((tag) => (
+
+      <div className="flex flex-wrap gap-2 pt-4 border-t border-[#f0ede8]">
+        {tags.map((tag: string) => (
           <span
             key={tag}
-            className="font-mono text-[9px] tracking-wide uppercase border border-[#e0dbd3] text-[#aaa] px-2 py-1 rounded"
+            className="font-mono text-[9px] tracking-wide uppercase text-[#999] bg-[#F7F5F0] px-2.5 py-1 rounded-md border border-[#e0dbd3]/50"
           >
             {tag}
           </span>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -118,75 +127,98 @@ export default function Projects() {
   };
 
   return (
-    <section className="bg-[#FAFAFA] py-24 px-6 min-h-screen">
-      <div className="max-w-5xl mx-auto">
+    <section className="bg-[#FAFAFA] py-28 px-6 min-h-screen selection:bg-[#C4763A]/20">
+      <div className="max-w-6xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-medium text-[#1a2b56] mb-4">
-            My <span className="italic font-light">Work</span>
-          </h2>
-          <div className="w-8 h-px bg-[#1a2b56]/20 mx-auto" />
-        </div>
+        <header className="text-center mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-light text-[#1a2b56] tracking-tight mb-6">
+              My <span className="italic font-serif">Projects</span>
+            </h2>
+            <div className="w-12 h-px bg-[#C4763A] mx-auto opacity-40" />
+          </motion.div>
+        </header>
 
-        {/* Folders Row */}
-        <div className="flex justify-center gap-16 flex-wrap mb-20">
+        {/* Folders Row - Interactive Navigation */}
+        <div className="flex justify-center gap-12 md:gap-20 flex-wrap mb-28">
           {folders.map((f) => (
-            <div
+            <motion.div
               key={f.key}
-              className="flex flex-col items-center gap-4 cursor-pointer group"
+              layout
+              className="flex flex-col items-center gap-5 cursor-pointer group relative"
               onClick={() => toggle(f.key)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <div className="relative">
                 <Folder
                   color={open === f.key ? f.color : "#d1ccc0"}
-                  size={1}
+                  size={1.1}
                   items={f.items.map(String)}
-                  className={`transition-all duration-300 transform ${
-                    open === f.key ? "scale-110" : "group-hover:translate-y-1"
+                  className={`transition-all duration-500 ${
+                    open === f.key
+                      ? "drop-shadow-2xl"
+                      : "grayscale-[0.4] group-hover:grayscale-0"
                   }`}
                 />
-                {/* Active Indicator Dot */}
-                {open === f.key && (
-                  <motion.div
-                    layoutId="activeDot"
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#C4763A]"
-                  />
-                )}
+
+                {/* Visual Glow Indicator */}
+                <AnimatePresence>
+                  {open === f.key && (
+                    <motion.div
+                      layoutId="folderGlow"
+                      className="absolute inset-0 bg-current rounded-full blur-3xl opacity-10 -z-10"
+                      style={{ color: f.color }}
+                    />
+                  )}
+                </AnimatePresence>
               </div>
 
-              <div className="text-center">
+              <div className="flex flex-col items-center gap-1">
                 <span
-                  className={`block font-mono text-[10px] tracking-[0.15em] uppercase transition-colors duration-300 ${
+                  className={`font-mono text-[11px] tracking-[0.25em] uppercase transition-all duration-300 ${
                     open === f.key
-                      ? "text-[#1a2b56]"
-                      : "text-[#aaa] group-hover:text-[#888]"
+                      ? "text-[#1a2b56] font-bold"
+                      : "text-[#aaa] group-hover:text-[#666]"
                   }`}
                 >
                   {f.label}
                 </span>
+                <span className="text-[10px] font-mono text-[#ccc] group-hover:text-[#bbb] transition-colors">
+                  / 0{projects[f.key].length}
+                </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Project Display Area */}
-        <div className="max-w-4xl mx-auto min-h-100">
+        <div className="max-w-5xl mx-auto min-h-[200px]">
           <AnimatePresence mode="wait">
             {open ? (
               <motion.div
                 key={open}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {projects[open].map((p, i) => (
                     <motion.div
                       key={p.name}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.1 }} // Staggered effect
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 20,
+                        delay: i * 0.08,
+                      }}
                     >
                       <ProjectCard
                         name={p.name}
@@ -204,10 +236,24 @@ export default function Projects() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center h-64 rounded-3xl"
+                className="flex flex-col items-center justify-center h-80 rounded-[2rem] border-2 border-dashed border-[#e0dbd3]/50 bg-white/30 backdrop-blur-sm"
               >
-                <p className="font-mono text-[11px] text-[#bbb] uppercase tracking-widest">
-                  Select a category to view projects
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ repeat: Infinity, duration: 3 }}
+                  className="w-10 h-10 mb-6 opacity-20"
+                >
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9l-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </motion.div>
+                <p className="font-mono text-[11px] text-[#999] uppercase tracking-[0.3em]">
+                  Exploration Awaits
                 </p>
               </motion.div>
             )}

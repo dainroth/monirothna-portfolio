@@ -13,24 +13,24 @@ export default function Hero() {
   return (
     <section className="relative min-h-[85vh] w-full bg-[#FAFAFA] flex flex-col items-center justify-center overflow-hidden pb-10">
       <FloatingCard
-        img="https://i.pinimg.com/736x/a0/44/70/a044704b725888b51b1eb5a978bf0d77.jpg"
+        img="/assets/keyboard.webp"
         className="top-12 left-4 rounded-2xl md:top-24 md:left-[18%] rotate-[-10deg]"
         delay={0.2}
       />
       <FloatingCard
-        img="/assets/macro.png"
+        img="/assets/macro.webp"
         className="top-6 right-4 md:top-36 md:right-[15%] rotate-12"
         size="sm"
         delay={0.4}
       />
       <FloatingCard
-        img="/assets/!-icon.png"
+        img="/assets/!-icon.webp"
         className="hidden md:block bottom-24 md:left-[28%] rotate-[5deg]"
         size="sm"
         delay={0.6}
       />
       <FloatingCard
-        img="/assets/tablet.png"
+        img="/assets/tablet (1).webp"
         className="bottom-32 right-4 md:bottom-40 md:right-[22%] rotate-[-8deg]"
         size="md"
         delay={0.8}
@@ -38,47 +38,27 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="text-center z-10 max-w-3xl px-4 flex flex-col items-center">
-        <motion.p
-          className="font-mono text-xs tracking-[0.2em] text-[#aaa9a5] uppercase mb-6"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+        <p className="font-mono text-xs tracking-[0.2em] text-[#aaa9a5] uppercase mb-6">
           Based in Cambodia
-        </motion.p>
+        </p>
 
-        <motion.h1
-          className="font-comic-relief text-5xl sm:text-[70px] md:text-[88px] lg:text-[96px] leading-[1.05] text-[#1a2b56] mb-6 tracking-tight"
-          initial={{ y: 24, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        >
+        <h1 className="font-comic-relief text-5xl sm:text-[70px] md:text-[88px] lg:text-[96px] leading-[1.05] text-[#1a2b56] mb-6 tracking-tight">
           Developer
           <br />
           <span className="text-[#C4763A]">&</span> Designer
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          className="text-[#888885] text-base leading-relaxed max-w-sm"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
+        <p className="text-[#888885] text-base leading-relaxed max-w-sm">
           University student specializing in building performant, well-crafted
           web applications.
-        </motion.p>
+        </p>
 
-        <motion.div
-          className="mt-8 flex items-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
+        <div className="mt-8 flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-[#5AB870] inline-block" />
           <span className="text-xs font-mono text-[#aaa9a5] tracking-widest uppercase">
             Open to work
           </span>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}

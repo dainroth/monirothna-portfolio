@@ -10,12 +10,13 @@ import { useState } from "react";
 import Link from "next/link";
 
 const leftLinks = [
-  { label: "Home", href: "/" },
-  { label: "Experience", href: "/experience" },
+  { label: "Home", href: "#home" },
+  { label: "Experience", href: "#experience" },
 ];
+
 const rightLinks = [
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -27,6 +28,16 @@ const Navbar = () => {
     [0, 50],
     ["rgba(255,255,255,0.9)", "rgba(255,255,255,1)"],
   );
+
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+
+    // Small delay to let the menu close, then scroll
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
 
   return (
     <motion.nav
@@ -112,9 +123,6 @@ const Navbar = () => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="overflow-hidden"
             >
-              {/* CHANGE: Switched to flex-col on mobile, md:grid on desktop.
-          Changed px-10 to px-6 on mobile for better spacing.
-      */}
               <div className="px-6 md:px-10 pb-8 pt-2 flex flex-col md:grid md:grid-cols-5 gap-y-8 md:gap-x-4">
                 {/* Links Wrapper: Groups links together on mobile */}
                 <div className="flex justify-between md:contents">
@@ -129,7 +137,10 @@ const Navbar = () => {
                       >
                         <Link
                           href={item.href}
-                          onClick={() => setIsOpen(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavClick(item.href);
+                          }}
                           className="text-[#1a1a1a] text-base md:text-xl font-normal hover:text-[#344B94] transition-colors"
                         >
                           {item.label}
@@ -149,7 +160,10 @@ const Navbar = () => {
                       >
                         <Link
                           href={item.href}
-                          onClick={() => setIsOpen(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavClick(item.href);
+                          }}
                           className="text-[#1a1a1a] text-base md:text-xl font-normal hover:text-[#344B94] transition-colors"
                         >
                           {item.label}

@@ -65,7 +65,7 @@ const Stack = () => {
       {/* TIGHTENED: flex-col items-center now has less bottom margin */}
       <div className="flex flex-col items-center mb-4">
         <Image
-          src="/assets/snoopy-skill.png"
+          src="/assets/snoopy-skill.webp"
           alt="skill"
           width={200} // SLIGHTLY SMALLER: 250 to 180 to reduce vertical "dead space"
           height={200}

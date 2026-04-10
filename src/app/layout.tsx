@@ -37,6 +37,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${comicRelief.variable} ${inter.variable}`}>
+      <head>
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+          href="/__nextjs_font/geist-latin.woff2"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
