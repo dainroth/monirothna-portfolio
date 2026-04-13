@@ -10,12 +10,13 @@ import { useState } from "react";
 import Link from "next/link";
 
 const leftLinks = [
-  { label: "Home", href: "/" },
-  { label: "Experience", href: "/experience" },
+  { label: "Home", href: "#home" },
+  { label: "Experience", href: "#experience" },
 ];
+
 const rightLinks = [
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "About\u00A0Me", href: "#about" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -28,6 +29,16 @@ const Navbar = () => {
     ["rgba(255,255,255,0.9)", "rgba(255,255,255,1)"],
   );
 
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+
+    // Small delay to let the menu close, then scroll
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
@@ -36,28 +47,28 @@ const Navbar = () => {
       className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4 pointer-events-none"
     >
       <motion.div
-        layout // ADD THIS: Crucial for smooth internal resizing
+        layout
         style={{ backgroundColor }}
         animate={{
-          // Ensure both states use a similar "scale" of rounding
           borderRadius: isOpen ? "32px" : "100px",
-          width: isOpen ? "min(550px, 100%)" : "280px", // Fixed width for closed state feels better
+          width: isOpen ? "min(550px, 100%)" : "280px",
         }}
         transition={{
           type: "spring",
-          stiffness: 400, // Higher stiffness for faster response
-          damping: 30, // Higher damping to prevent "jiggling" at the end
-          mass: 0.8, // Makes it feel lighter
+          stiffness: 400,
+          damping: 30,
+          mass: 0.8,
         }}
         className="relative shadow-[0_4px_32px_rgba(0,0,0,0.10)] border border-black/5 pointer-events-auto overflow-hidden"
       >
-        <div className="flex items-center justify-between px-5 h-15">
+        <div className="flex items-center justify-between px-4 h-15">
           <div className="flex items-center  shrink-0">
             <Image
               src="/assets/logo (2).png"
               alt="Logo"
               width={34}
               height={34}
+              priority
               className="object-contain w-8.5 h-8.5"
             />
             <AnimatePresence>
@@ -81,7 +92,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 shrink-0 flex items-center justify-center text-black cursor-pointer"
           >
-            {/* Using a simple div-based icon for the smoothest "X" transition */}
+            {/* using a simple div-based icon for the smoothest "X" transition */}
             <div className="relative w-5 h-5 flex items-center justify-center">
               <motion.span
                 animate={{
@@ -102,7 +113,6 @@ const Navbar = () => {
           </motion.button>
         </div>
 
-        {/* EXPANDED CONTENT */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -112,10 +122,7 @@ const Navbar = () => {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="overflow-hidden"
             >
-              {/* CHANGE: Switched to flex-col on mobile, md:grid on desktop.
-          Changed px-10 to px-6 on mobile for better spacing.
-      */}
-              <div className="px-6 md:px-10 pb-8 pt-2 flex flex-col md:grid md:grid-cols-5 gap-y-8 md:gap-x-4">
+              <div className="px-7 md:px-10 pb-8 pt-2 flex flex-col md:grid md:grid-cols-5 gap-y-8 md:gap-x-4">
                 {/* Links Wrapper: Groups links together on mobile */}
                 <div className="flex justify-between md:contents">
                   {/* Left links */}
@@ -129,7 +136,10 @@ const Navbar = () => {
                       >
                         <Link
                           href={item.href}
-                          onClick={() => setIsOpen(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavClick(item.href);
+                          }}
                           className="text-[#1a1a1a] text-base md:text-xl font-normal hover:text-[#344B94] transition-colors"
                         >
                           {item.label}
@@ -139,7 +149,7 @@ const Navbar = () => {
                   </div>
 
                   {/* Right links */}
-                  <div className="flex flex-col gap-5 font-comic-relief md:ml-8">
+                  <div className="flex flex-col gap-5 font-comic-relief md:ml-6">
                     {rightLinks.map((item, i) => (
                       <motion.div
                         key={item.label}
@@ -149,7 +159,10 @@ const Navbar = () => {
                       >
                         <Link
                           href={item.href}
-                          onClick={() => setIsOpen(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavClick(item.href);
+                          }}
                           className="text-[#1a1a1a] text-base md:text-xl font-normal hover:text-[#344B94] transition-colors"
                         >
                           {item.label}
@@ -172,15 +185,23 @@ const Navbar = () => {
                     aspectRatio: "16/9",
                   }}
                 >
+                  <Link
+                    href="https://eykorban.vercel.app/"
+                    className="absolute inset-0 z-10"
+                    tabIndex={-1}
+                    aria-label="Go to featured project"
+                  >
+                    <span className="sr-only">Go to featured project</span>
+                  </Link>
                   <Image
-                    src="https://i.pinimg.com/control1/1200x/a1/88/d7/a188d755f52129e415edac7a121116eb.jpg"
+                    src="/assets/here-my-id.jpg"
                     alt="Featured Project"
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white font-gamja text-base md:text-lg">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 text-white font-comic-relief text-base md:text-lg pointer-events-none">
                     Featured Project
                   </div>
                 </motion.div>
