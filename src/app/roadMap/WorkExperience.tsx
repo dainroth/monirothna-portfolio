@@ -9,7 +9,7 @@ const experiences = [
     description:
       "Junior Developer capable in React, Next.js, and TypeScript. I build state-aware UI features and integrate data using Apollo GraphQL.",
     color: "#1a2b56",
-    stack: ["React", "Next.js", "GraphQL", "Apollo", "Tailwind"],
+    stack: ["React", "Next.js", "GraphQL", "TypeScript", "Tailwind"],
   },
   {
     date: "Sep 2025 - Dec 2025",
@@ -18,7 +18,7 @@ const experiences = [
     description:
       "Engineered internal applications using React, Next.js, and TypeScript, focusing on seamless data integration.",
     color: "#1a2b56",
-    stack: ["React", "Next.js", "Tailwind"],
+    stack: ["React", "Next.js", "TypeScript", "Tailwind"],
   },
 ];
 const ExperienceRoadmap = () => {
@@ -61,10 +61,10 @@ const ExperienceRoadmap = () => {
                 </div>
 
                 <div className="space-y-0.5 mb-4">
-                  <h3 className="text-lg md:text-xl font-bold text-[#2D2D2D] tracking-tight">
+                  <h3 className="text-lg md:text-xl font-comic-relief font-semibold text-[#2D2D2D] tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="font-semibold font-comic-relief text-[#1a2b56] text-base">
+                  <p className="font-comic-relief font-semibold text-[#1a2b56] text-base">
                     {item.company}
                   </p>
                   <p className="text-gray-500 font-comic-relief leading-snug text-sm pt-1">
@@ -73,7 +73,7 @@ const ExperienceRoadmap = () => {
                 </div>
 
                 {/*stack */}
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#2D2D2D]/5">
+                <div className="flex flex-wrap font-comic-relief gap-1.5 pt-3 border-t border-[#2D2D2D]/5">
                   {item.stack.map((tech) => (
                     <span
                       key={tech}

@@ -49,9 +49,9 @@ export default function Hero() {
           <span className="text-[#C4763A]">&</span> Designer
         </h1>
 
-        <p className="text-[#888885] text-base leading-relaxed max-w-sm">
-          University student specializing in building performant, well-crafted
-          web applications.
+        <p className="text-[#888885] font-comic-relief text-base leading-relaxed max-w-sm">
+          A Developer specializing in building performant, well-crafted web
+          applications.
         </p>
 
         <div className="mt-8 flex items-center gap-3">
