@@ -95,7 +95,7 @@ export default function About() {
           className="absolute -bottom-[20px] left-[4px] bg-white border border-[#e0dbd3] rounded-xl px-4 py-3.5 w-[180px] z-20"
         >
           <div className="w-2.5 h-2.5 rounded-full bg-[#C4763A] mb-2.5" />
-          <p className="text-[12px] text-[#555] leading-relaxed mb-2.5">
+          <p className="text-[12px] font-comic-relief text-[#555] leading-relaxed mb-2.5">
             Open to work — let&apos;s build something great.
           </p>
           <a
@@ -109,7 +109,7 @@ export default function About() {
 
       {/* Bio — below the collage */}
       <motion.p
-        className="text-center text-[15px] text-[#666] leading-relaxed max-w-sm"
+        className="text-center text-[15px] font-comic-relief text-[#666] leading-relaxed max-w-sm"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
