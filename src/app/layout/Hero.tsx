@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero() {
   const scrollToSpinner = () => {
@@ -16,6 +16,7 @@ export default function Hero() {
         img="/assets/keyboard.webp"
         className="top-12 left-4 rounded-2xl md:top-24 md:left-[18%] rotate-[-10deg]"
         delay={0.2}
+        priority
       />
       <FloatingCard
         img="/assets/macro.webp"
@@ -86,16 +87,24 @@ function FloatingCard({
   className,
   delay,
   size = "md",
+  priority = false,
 }: {
   img: string;
   className: string;
   delay: number;
   size?: "sm" | "md" | "lg";
+  priority?: boolean;
 }) {
   const sizeClasses = {
     sm: "w-14 sm:w-20 md:w-28",
     md: "w-20 sm:w-28 md:w-40",
     lg: "w-24 sm:w-36 md:w-48",
+  };
+
+  const sizes = {
+    sm: 112,
+    md: 160,
+    lg: 192,
   };
 
   return (
@@ -108,11 +117,15 @@ function FloatingCard({
       }}
       className={`absolute ${sizeClasses[size]} pointer-events-none z-0 ${className}`}
     >
-      <img
+      <Image
         src={img}
+        width={sizes[size]}
+        height={sizes[size]}
         className="w-full h-auto object-contain"
         style={{ filter: "saturate(0.85) sepia(0.08)" }}
         alt="Floating decoration"
+        priority={priority}
+        loading={priority ? "eager" : "lazy"}
       />
     </motion.div>
   );

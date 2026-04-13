@@ -14,7 +14,7 @@ const folders: {
   {
     key: "webapps",
     label: "Web Application",
-    color: "#C4763A",
+    color: "#648dca",
     items: [1, 2, 3],
   },
   {
@@ -26,7 +26,7 @@ const folders: {
   {
     key: "school",
     label: "School Projects",
-    color: "#5227FF",
+    color: "#edf1f6",
     items: [1, 2],
   },
 ];
@@ -48,11 +48,11 @@ const projects: Record<
       desc: "A Full Stack Web Application for fun decision making.",
       tags: ["Next.js", "TypeScript", "Node.js"],
     },
-    // {
-    //   name: "Project Beta",
-    //   desc: "E-commerce storefront with cart, checkout flow, and Stripe payment integration.",
-    //   tags: ["React", "Tailwind", "Stripe"],
-    // },
+    {
+      name: "NTX (Private)",
+      desc: "E-commerce admin dashboard for managing products, orders, and users.",
+      tags: ["TypeScript", "Tailwind", "Next.js", "GraphQL"],
+    },
     // {
     //   name: "Project Gamma",
     //   desc: "Dashboard for tracking analytics with charts, filters, and exportable reports.",
@@ -73,14 +73,14 @@ const projects: Record<
   ],
   school: [
     {
-      name: "Student Portal",
-      desc: "University class project — schedule management and grade tracking portal.",
-      tags: ["React", "Firebase"],
+      name: "Coffee Shop Management System (In progress)",
+      desc: "A full-stack application for managing orders, inventory, and staff scheduling at a local coffee shop.",
+      tags: ["REST", "PostgreSQL", "Next.js"],
     },
     {
       name: "Data Visualizer",
       desc: "Final year capstone — interactive data visualization tool for CSV datasets.",
-      tags: ["D3.js", "TypeScript"],
+      tags: ["D3.js", "TypeScript", "PowerBI"],
     },
   ],
 };
@@ -92,16 +92,16 @@ function ProjectCard({ name, desc, tags, category }: ProjectCardProps) {
       className="bg-white border border-[#e0dbd3]/80 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:border-[#C4763A]/30 transition-all duration-300 group h-full flex flex-col"
     >
       <div className="flex justify-between items-start mb-4">
-        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#C4763A] bg-[#C4763A]/5 px-2 py-1 rounded">
+        <span className="font-comic-relief text-[9px] tracking-[0.2em] uppercase text-[#C4763A] bg-[#C4763A]/5 px-2 py-1 rounded">
           {category}
         </span>
       </div>
 
-      <h3 className="font-medium text-[#1a2b56] text-lg mb-2 group-hover:text-[#C4763A] transition-colors">
+      <h3 className="font-comic-relief text-[#1a2b56] text-lg mb-2 group-hover:text-[#C4763A] transition-colors">
         {name}
       </h3>
 
-      <p className="text-[13px] text-[#666] leading-relaxed mb-6 grow">
+      <p className="font-comic-relief text-[13px] text-[#666] leading-relaxed mb-6 grow">
         {desc}
       </p>
 
@@ -136,8 +136,8 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl font-light text-[#1a2b56] tracking-tight mb-6">
-              My <span className="italic font-serif">Projects</span>
+            <h2 className="text-5xl font-comic-relief text-[#1a2b56] tracking-tight mb-6">
+              My <span className="italic font-comic-relief">Projects</span>
             </h2>
             <div className="w-12 h-px bg-[#C4763A] mx-auto opacity-40" />
           </motion.div>
@@ -236,12 +236,12 @@ export default function Projects() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center h-80 rounded-[2rem] border-2 border-dashed border-[#e0dbd3]/50 bg-white/30 backdrop-blur-sm"
+                className="flex flex-col items-center justify-start rounded-xl border border-dashed border-[#e0dbd3]/60 bg-white/60 backdrop-blur-sm py-8 px-4 min-h-[120px]"
               >
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className="w-10 h-10 mb-6 opacity-20"
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.2 }}
+                  className="w-7 h-7 mb-2 opacity-15"
                 >
                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
@@ -252,7 +252,7 @@ export default function Projects() {
                     />
                   </svg>
                 </motion.div>
-                <p className="font-mono text-[11px] text-[#999] uppercase tracking-[0.3em]">
+                <p className="font-mono text-[10px] text-[#aaa] uppercase tracking-[0.2em] mt-1">
                   Exploration Awaits
                 </p>
               </motion.div>

@@ -1,23 +1,27 @@
 import type { Metadata } from "next";
-import { Comic_Relief, Geist, Geist_Mono, Inter } from "next/font/google";
+import { Comic_Relief, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const comicRelief = Comic_Relief({
   variable: "--font-comic-relief",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -36,14 +40,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${comicRelief.variable} ${inter.variable}`}>
+    <html lang="en" className={`${comicRelief.variable} ${geistSans.variable}`}>
       <head>
         <link
           rel="preload"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          href="/__nextjs_font/geist-latin.woff2"
+          as="image"
+          href="/assets/keyboard.webp"
+          type="image/webp"
         />
       </head>
       <body

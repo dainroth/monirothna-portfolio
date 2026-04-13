@@ -73,9 +73,9 @@ export default function Footer() {
               I&apos;m not done.
             </h2>
             <p className="text-[#F7F5F0]/70 text-sm sm:text-base leading-relaxed font-comic-relief max-w-sm">
-              Deep in the books or deep in the code. Im always open to talking
-              about the nuances of design and music. Or maybe lets grab coffee
-              someday?
+              Somewhere between pages or stuck in code, I’m always learning, I
+              enjoy good conversations, quiet moments with music, and the kind
+              of talks that linger. Maybe we’ll share one over coffee someday
             </p>
           </motion.div>
 
