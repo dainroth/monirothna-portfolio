@@ -72,7 +72,7 @@ export default function About() {
 
         {/* Scattered image: tablet — right */}
         <FloatImg
-          src="/assets/tablet (1).webp"
+          src="/assets/tablet.webp"
           style={{ top: "38%", right: "2%", width: 110 }}
           rotate={-6}
           delay={0.5}

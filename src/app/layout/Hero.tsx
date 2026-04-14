@@ -31,7 +31,7 @@ export default function Hero() {
         delay={0.6}
       />
       <FloatingCard
-        img="/assets/tablet (1).webp"
+        img="/assets/tablet.webp"
         className="bottom-32 right-4 md:bottom-40 md:right-[22%] rotate-[-8deg]"
         size="md"
         delay={0.8}

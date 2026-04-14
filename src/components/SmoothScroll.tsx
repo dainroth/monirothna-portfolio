@@ -10,45 +10,40 @@ export default function SmoothScroll({
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Defer Lenis initialization to reduce TBT
-    const timeoutId =
-      requestIdleCallback?.(
-        () => {
-          const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          });
-          lenisRef.current = lenis;
+    let timeoutId: number | undefined;
+    let idleCallbackId: number | undefined;
 
-          function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-          }
+    const initLenis = () => {
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+      lenisRef.current = lenis;
 
-          requestAnimationFrame(raf);
-        },
-        { timeout: 1000 },
-      ) ??
-      setTimeout(() => {
-        const lenis = new Lenis({
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        });
-        lenisRef.current = lenis;
-
-        function raf(time: number) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-
+      function raf(time: number) {
+        lenis.raf(time);
         requestAnimationFrame(raf);
-      }, 100);
+      }
+
+      requestAnimationFrame(raf);
+    };
+
+    // Defer Lenis initialization to reduce TBT
+    if (typeof requestIdleCallback !== "undefined") {
+      idleCallbackId = requestIdleCallback(initLenis, { timeout: 1000 });
+    } else {
+      timeoutId = window.setTimeout(initLenis, 100);
+    }
 
     return () => {
-      if (typeof timeoutId === "number") {
+      if (timeoutId !== undefined) {
         clearTimeout(timeoutId);
-      } else {
-        cancelIdleCallback?.(timeoutId as number);
+      }
+      if (
+        idleCallbackId !== undefined &&
+        typeof cancelIdleCallback !== "undefined"
+      ) {
+        cancelIdleCallback(idleCallbackId);
       }
       lenisRef.current?.destroy();
     };
