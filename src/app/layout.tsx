@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   title: "Sakhan Monirothna",
   description: "Interactive portfolio",
   icons: {
-    icon: "/assets/logo (2).png", // Point this to a file in your 'public' folder
-    shortcut: "/assets/logo (2).png",
-    apple: "/assets/logo (2).png", // Optional: For iOS home screen bookmarks
+    icon: "/assets/logo.png",
+    shortcut: "/assets/logo.png",
+    apple: "/assets/logo.png",
   },
 };
 
@@ -42,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${comicRelief.variable} ${geistSans.variable}`}>
       <head>
+        {/* Ensure this file exists in /public/assets/ */}
         <link
           rel="preload"
           as="image"
