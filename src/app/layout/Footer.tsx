@@ -57,9 +57,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#1a2b56] text-[#F7F5F0] pt-20 pb-12 px-4 sm:px-6 lg:px-8 rounded-t-[2.5rem] mt-20">
       <div className="max-w-7xl mx-auto">
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20 mb-16">
-          {/* Left: Heading & Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -67,19 +65,17 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-1 space-y-6"
           >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tighter leading-tight">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif tracking-tighter leading-tight">
               If it doesn&apos;t
               <span className="italic font-serif block">spark joy</span>
               I&apos;m not done.
             </h2>
             <p className="text-[#F7F5F0]/70 text-sm sm:text-base leading-relaxed font-comic-relief max-w-sm">
-              Somewhere between pages or stuck in code, I’m always learning, I
-              enjoy good conversations, quiet moments with music, and the kind
+              I enjoy good conversations, quiet moments with music, and the kind
               of talks that linger. Maybe we’ll share one over coffee someday
             </p>
           </motion.div>
 
-          {/* Right: Social Links in Two Columns */}
           <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16">
             {/* Connect Section */}
             <motion.div
@@ -94,7 +90,7 @@ export default function Footer() {
               </p>
               <ul className="space-y-4">
                 {socialLinks.slice(0, 3).map((link, i) => {
-                  const Icon = link.icon;
+                  // const Icon = link.icon;
                   return (
                     <motion.li
                       key={link.name}
@@ -107,7 +103,7 @@ export default function Footer() {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-sm sm:text-base font-medium hover:text-[#C4763A] font-comic-relief transition-colors duration-300 group"
+                        className="flex items-center gap-3 text-sm sm:text-base font-medium hover:text-[#8fb3e2] font-comic-relief transition-colors duration-300 group"
                       >
                         <span className="w-5 h-5 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
                           {/* <Icon size={20} strokeWidth={1.5} /> */}
@@ -121,7 +117,7 @@ export default function Footer() {
               </ul>
             </motion.div>
 
-            {/* Direct Section */}
+            {/* direct Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +143,7 @@ export default function Footer() {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-sm sm:text-base font-medium hover:text-[#C4763A] font-comic-relief transition-colors duration-300 group"
+                        className="flex items-center gap-3 text-sm sm:text-base font-medium hover:text-[#8fb3e2] font-comic-relief transition-colors duration-300 group"
                       >
                         <span className="w-5 h-5 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
                           {link.icon}
@@ -164,7 +160,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-white/0 via-white/10 to-white/0 mb-8" />
+        <div className="h-px bg-linear-to-r from-white/0 via-white/10 to-white/0 mb-8" />
 
         {/* Footer Bottom */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">

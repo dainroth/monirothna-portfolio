@@ -25,13 +25,7 @@ const comicRelief = Comic_Relief({
 });
 
 export const metadata: Metadata = {
-  title: "Sakhan Monirothna",
-  description: "Interactive portfolio",
-  icons: {
-    icon: "/assets/logo.png",
-    shortcut: "/assets/logo.png",
-    apple: "/assets/logo.png",
-  },
+  title: "Sakhan Monirothna portfolio",
 };
 
 export default function RootLayout({
@@ -42,13 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${comicRelief.variable} ${geistSans.variable}`}>
       <head>
-        {/* Ensure this file exists in /public/assets/ */}
-        <link
-          rel="preload"
-          as="image"
-          href="/assets/keyboard.webp"
-          type="image/webp"
-        />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/icon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

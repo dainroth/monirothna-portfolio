@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { motion } from "framer-motion";
-import { ArrowBigRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function About() {
   return (
@@ -24,9 +24,7 @@ export default function About() {
         About me
       </motion.p>
 
-      {/* Collage container — everything positioned inside this */}
       <div className="relative w-full max-w-2xl h-87.5 mx-auto mb-12">
-        {/* Subtle grid */}
         {/* <div
           className="absolute inset-0 opacity-[0.04] rounded-3xl"
           style={{
