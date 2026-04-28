@@ -21,7 +21,7 @@ export default function PageContent() {
           <Hero />
         </div>
 
-        <section id="about">
+        <section>
           <About />
         </section>
 

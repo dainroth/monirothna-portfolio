@@ -53,11 +53,11 @@ const projects: Record<
       desc: "E-commerce admin dashboard for managing products, orders, and users.",
       tags: ["TypeScript", "Tailwind", "Next.js", "GraphQL"],
     },
-    // {
-    //   name: "Project Gamma",
-    //   desc: "Dashboard for tracking analytics with charts, filters, and exportable reports.",
-    //   tags: ["Next.js", "GraphQL", "Apollo"],
-    // },
+    {
+      name: "Sakhan Monirothna Portfolio",
+      desc: "Personal portfolio website showcasing projects, skills, and contact info.",
+      tags: ["Next.js", "Tailwind", "Framer Motion", "TypeScript", "Figma"],
+    },
   ],
   uidesign: [
     {

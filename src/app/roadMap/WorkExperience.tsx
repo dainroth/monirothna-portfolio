@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    date: "Jan 2026 - Present",
+    date: "Jan 2026 - Apr 2026",
     title: "Junior Developer",
     company: "Nano Sound Co. Ltd",
     description:
@@ -13,12 +13,12 @@ const experiences = [
   },
   {
     date: "Sep 2025 - Dec 2025",
-    title: "Junior Front-End Developer",
+    title: "Freelance Front-End Developer",
     company: "Bong IT Solutions",
     description:
       "Engineered internal applications using React, Next.js, and TypeScript, focusing on seamless data integration.",
     color: "#1a2b56",
-    stack: ["React", "Next.js", "TypeScript", "Tailwind"],
+    stack: ["React", "Next.js", "Git", "Tailwind"],
   },
 ];
 const ExperienceRoadmap = () => {
