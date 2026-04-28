@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 export default function About() {
   return (
@@ -23,9 +24,7 @@ export default function About() {
         About me
       </motion.p>
 
-      {/* Collage container — everything positioned inside this */}
       <div className="relative w-full max-w-2xl h-87.5 mx-auto mb-12">
-        {/* Subtle grid */}
         {/* <div
           className="absolute inset-0 opacity-[0.04] rounded-3xl"
           style={{
@@ -99,10 +98,11 @@ export default function About() {
             Open to work — let&apos;s build something great.
           </p>
           <a
-            href="mailto:rothanaemily@gmail.com"
-            className="font-mono text-[10px] tracking-wide text-[#C4763A] underline underline-offset-2 hover:opacity-70 transition-opacity"
+            href="/assets/Sakhan-wb.pdf"
+            className="font-mono flex gap-2 text-base tracking-wide text-[#C4763A] hover:opacity-70 transition-opacity"
           >
-            Get in touch →
+            My CV
+            <ArrowRight />
           </a>
         </motion.div>
       </div>
@@ -116,11 +116,9 @@ export default function About() {
         viewport={{ once: true }}
       >
         I&apos;m Monirothna, a developer and university student in Phnom Penh. I
-        truly appreciate the often-overlooked details that shape our
-        experiences, even if they go unnoticed by many. When I&apos;m not
-        immersed in building projects, I love to edit videos, seek out great
-        coffee to share with friends, or lose myself in the joy of discovering
-        new music.
+        appreciate the details that shape our experiences. When I&apos;m not
+        coding, I enjoy editing videos, finding great coffee to share with
+        friends, and discovering new music.
       </motion.p>
     </section>
   );

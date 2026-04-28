@@ -8,6 +8,10 @@
   font-family: var(--font-comic-relief), cursive;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Folder from "@/src/components/Folder";
+import Link from "next/link";
 
 type FolderKey = "webapps" | "uidesign" | "school";
 
@@ -36,38 +37,44 @@ interface ProjectCardProps {
   desc: string;
   tags: string[];
   category: string;
+  link: string;
 }
 
 const projects: Record<
   FolderKey,
-  { name: string; desc: string; tags: string[] }[]
+  { name: string; desc: string; tags: string[]; link: string }[]
 > = {
   webapps: [
     {
       name: "Ey Kor Ban Project (In Progress)",
       desc: "A Full Stack Web Application for fun decision making.",
+      link: "https://eykorban.vercel.app/",
       tags: ["Next.js", "TypeScript", "Node.js"],
     },
     {
       name: "NTX (Private)",
       desc: "E-commerce admin dashboard for managing products, orders, and users.",
+      link: "",
       tags: ["TypeScript", "Tailwind", "Next.js", "GraphQL"],
     },
-    // {
-    //   name: "Project Gamma",
-    //   desc: "Dashboard for tracking analytics with charts, filters, and exportable reports.",
-    //   tags: ["Next.js", "GraphQL", "Apollo"],
-    // },
+    {
+      name: "Sakhan Monirothna Portfolio",
+      desc: "Personal portfolio website showcasing projects, skills, and contact info.",
+      link: "https://sakhanmonirothna.vercel.app/",
+      tags: ["Next.js", "Tailwind", "Framer Motion", "TypeScript", "Figma"],
+    },
   ],
   uidesign: [
     {
       name: "The KOI ",
       desc: "Research and Redesign the user experience of the KOI.",
+      link: "https://www.figma.com/design/9IXfoziQVTHEVGKxXmKX5s/KOI-Final?node-id=0-1&t=HQRy67vvMuzi5yBv-1",
       tags: ["Figma", "Adobe Illustrator"],
     },
     {
       name: "Motion Playground",
       desc: "Experiments with Framer Motion — page transitions, scroll effects, micro-interactions.",
+      link: "",
       tags: ["Framer Motion", "React"],
     },
   ],
@@ -75,50 +82,76 @@ const projects: Record<
     {
       name: "Coffee Shop Management System (In progress)",
       desc: "A full-stack application for managing orders, inventory, and staff scheduling at a local coffee shop.",
+      link: "",
       tags: ["REST", "PostgreSQL", "Next.js"],
     },
     {
       name: "Data Visualizer",
       desc: "Final year capstone — interactive data visualization tool for CSV datasets.",
+      link: "",
       tags: ["D3.js", "TypeScript", "PowerBI"],
     },
   ],
 };
+function ProjectCard({ name, desc, tags, category, link }: ProjectCardProps) {
+  const isClickable = link !== "";
 
-function ProjectCard({ name, desc, tags, category }: ProjectCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className="bg-white border border-[#e0dbd3]/80 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:border-[#C4763A]/30 transition-all duration-300 group h-full flex flex-col"
+      whileHover={isClickable ? { y: -5, transition: { duration: 0.2 } } : {}}
+      className={`bg-white border border-[#e0dbd3]/80 rounded-2xl p-6 shadow-sm transition-all duration-300 group h-full flex flex-col ${
+        isClickable
+          ? "hover:shadow-xl hover:border-[#C4763A]/30 cursor-pointer"
+          : "cursor-default"
+      }`}
     >
-      <div className="flex justify-between items-start mb-4">
-        <span className="font-comic-relief text-[9px] tracking-[0.2em] uppercase text-[#C4763A] bg-[#C4763A]/5 px-2 py-1 rounded">
-          {category}
-        </span>
-      </div>
-
-      <h3 className="font-comic-relief text-[#1a2b56] text-lg mb-2 group-hover:text-[#C4763A] transition-colors">
-        {name}
-      </h3>
-
-      <p className="font-comic-relief text-[13px] text-[#666] leading-relaxed mb-6 grow">
-        {desc}
-      </p>
-
-      <div className="flex flex-wrap gap-2 pt-4 border-t border-[#f0ede8]">
-        {tags.map((tag: string) => (
-          <span
-            key={tag}
-            className="font-mono text-[9px] tracking-wide uppercase text-[#999] bg-[#F7F5F0] px-2.5 py-1 rounded-md border border-[#e0dbd3]/50"
-          >
-            {tag}
+      <Link
+        href={link || "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={!isClickable ? "pointer-events-none" : ""}
+        onClick={(e) => !isClickable && e.preventDefault()}
+      >
+        <div className="flex justify-between items-start mb-4">
+          <span className="font-comic-relief text-[9px] tracking-[0.2em] uppercase text-[#1a2b56] bg-[#8fb3e2]/10 px-2 py-1 rounded">
+            {category}
           </span>
-        ))}
-      </div>
+          {isClickable && (
+            <svg
+              className="w-4 h-4 text-[#1a2b56] opacity-0 group-hover:opacity-100 transition-opacity"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          )}
+        </div>
+        <h3 className="font-comic-relief text-[#1a2b56] text-lg mb-2 group-hover:text-[#4464a8] transition-colors">
+          {name}
+        </h3>
+        <p className="font-comic-relief text-[13px] text-[#666] leading-relaxed mb-6 grow">
+          {desc}
+        </p>
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-[#f0ede8]">
+          {tags.map((tag: string) => (
+            <span
+              key={tag}
+              className="font-mono text-[10px] tracking-wide uppercase text-mauve-600 bg-[#F7F5F0] px-2.5 py-1 rounded-md border border-[#e0dbd3]/50"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </Link>
     </motion.div>
   );
 }
-
 export default function Projects() {
   const [open, setOpen] = useState<FolderKey | null>(null);
 
@@ -197,7 +230,7 @@ export default function Projects() {
         </div>
 
         {/* Project Display Area */}
-        <div className="max-w-5xl mx-auto min-h-[200px]">
+        <div className="max-w-5xl mx-auto min-h-50">
           <AnimatePresence mode="wait">
             {open ? (
               <motion.div
@@ -224,6 +257,7 @@ export default function Projects() {
                         name={p.name}
                         desc={p.desc}
                         tags={p.tags}
+                        link={p.link}
                         category={
                           folders.find((f) => f.key === open)?.label ?? ""
                         }
@@ -236,7 +270,7 @@ export default function Projects() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-start rounded-xl border border-dashed border-[#e0dbd3]/60 bg-white/60 backdrop-blur-sm py-8 px-4 min-h-[120px]"
+                className="flex flex-col items-center justify-start rounded-xl border border-dashed border-[#e0dbd3]/60 bg-white/60 backdrop-blur-sm py-8 px-4 min-h-30"
               >
                 <motion.div
                   animate={{ y: [0, -3, 0] }}

@@ -22,8 +22,6 @@ export default function Header() {
         variants={{ visible: { y: 0 }, hidden: { y: -100 } }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.3 }}
-        // CHANGE: Added 'flex justify-center' and 'p-4' (the floating gap)
-        // REMOVED: 'w-full' and 'border-b-4'
         className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 pointer-events-none"
       >
         <Navbar />

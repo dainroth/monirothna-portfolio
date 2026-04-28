@@ -8,20 +8,22 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const leftLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Experience", href: "#experience" },
+  { label: "Home", href: "/" },
+  { label: "Experience", href: "/#experience" },
 ];
 
 const rightLinks = [
-  { label: "About\u00A0Me", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "About\u00A0Me", href: "/aboutMe" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
   const { scrollY } = useScroll();
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const backgroundColor = useTransform(
     scrollY,
@@ -32,9 +34,14 @@ const Navbar = () => {
   const handleNavClick = (href: string) => {
     setIsOpen(false);
 
-    // Small delay to let the menu close, then scroll
+    if (!href.startsWith("/#")) {
+      router.push(href);
+      return;
+    }
+
+    const selector = href.slice(1);
     setTimeout(() => {
-      const element = document.querySelector(href);
+      const element = document.querySelector(selector);
       element?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
@@ -63,14 +70,16 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between px-4 h-15">
           <div className="flex items-center  shrink-0">
-            <Image
-              src="/assets/logo.png"
-              alt="Logo"
-              width={34}
-              height={34}
-              priority
-              className="object-contain w-8.5 h-8.5"
-            />
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/assets/logo.png"
+                alt="Logo"
+                width={34}
+                height={34}
+                priority
+                className="object-contain w-8.5 h-8.5"
+              />
+            </Link>
             <AnimatePresence>
               {isOpen && (
                 <motion.span

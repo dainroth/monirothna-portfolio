@@ -11,6 +11,9 @@ import {
   SiFigma,
   SiNodedotjs,
   SiJavascript,
+  SiMysql,
+  SiPostgresql,
+  SiGit,
 } from "react-icons/si";
 
 const techLogos = [
@@ -56,20 +59,33 @@ const techLogos = [
     title: "Figma",
     href: "https://www.figma.com",
   },
+  {
+    node: <SiMysql />,
+    title: "MySQL",
+    href: "https://www.mysql.com",
+  },
+  {
+    node: <SiPostgresql />,
+    title: "PostgreSQL",
+    href: "https://www.postgresql.org",
+  },
+  {
+    node: <SiGit />,
+    title: "Git",
+    href: "https://git-scm.com",
+  },
 ];
 
 const Stack = () => {
   return (
-    // REDUCED: py-8 to py-4 to hug the Hero and Experience sections
     <section className="overflow-hidden py-4 bg-[#FAFAFA]">
-      {/* TIGHTENED: flex-col items-center now has less bottom margin */}
       <div className="flex flex-col items-center mb-4">
         <Image
           src="/assets/snoopy-skill.webp"
           alt="skill"
-          width={200} // SLIGHTLY SMALLER: 250 to 180 to reduce vertical "dead space"
+          width={200}
           height={200}
-          className="mb-2" // NEGATIVE MARGIN: Pulls the text closer to the image
+          className="mb-2"
         />
         <span className="font-mono mb-8 text-base text-[#1a2b56] uppercase tracking-widest">
           Sneak peek of my stack
@@ -78,7 +94,6 @@ const Stack = () => {
 
       <div
         style={{
-          // REDUCED: height 200px to 120px to remove the "giant white bar" feel
           height: "120px",
           position: "relative",
           overflow: "hidden",
@@ -87,14 +102,14 @@ const Stack = () => {
       >
         <LogoLoop
           logos={techLogos}
-          speed={40} // SLOWER: 60 to 40 for a more "premium/smooth" feel
+          speed={40}
           direction="left"
-          logoHeight={50} // SMALLER: 60 to 50 for better visual balance
-          gap={80} // WIDER GAP: Paradoxically, more space *between* icons looks cleaner than space *above* them
+          logoHeight={50}
+          gap={80}
           hoverSpeed={0}
           scaleOnHover
           fadeOut
-          fadeOutColor="#FAFAFA" // MATCHED: Set to your background color for seamless edges
+          fadeOutColor="#FAFAFA"
           ariaLabel="Technology partners"
         />
       </div>
