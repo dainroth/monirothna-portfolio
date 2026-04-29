@@ -335,7 +335,7 @@ const AboutSection = () => {
                         {
                           title: "Nanami Edit",
                           path: "/assets/nanami-1.mp4",
-                          type: "Short Form",
+                          type: " Trying out new techniques and styles",
                         },
                         {
                           title: "Street Cinematics",
@@ -345,7 +345,7 @@ const AboutSection = () => {
                         {
                           title: "Motion Practice",
                           path: "/assets/nanami-2.mp4",
-                          type: "Animation",
+                          type: "",
                         },
                         {
                           title: "More coming soon...",
