@@ -3,6 +3,15 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
+    date: "May 2026 - Present",
+    title: "Internship Developer",
+    company: "Floresta",
+    description:
+      "As an Internship Developer, I contribute to building a user-friendly web application using React Router. I focus on creating seamless navigation and enhancing the overall user experience.",
+    color: "#1a2b56",
+    stack: ["React Router", "Motion Framer"],
+  },
+  {
     date: "Jan 2026 - Apr 2026",
     title: "Junior Developer",
     company: "Nano Sound Co. Ltd",

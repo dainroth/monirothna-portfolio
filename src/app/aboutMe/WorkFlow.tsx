@@ -4,6 +4,13 @@ import { useRef } from "react";
 
 const experiences = [
   {
+    date: "May 2026 — Present",
+    title: "Internship Developer",
+    company: "Floresta",
+    description:
+      "As an Internship Developer, I contribute to building a user-friendly web application using React Router.",
+  },
+  {
     date: "Jan 2026 — Apr 2026",
     title: "Junior Developer",
     company: "Nano Sound Co. Ltd",
