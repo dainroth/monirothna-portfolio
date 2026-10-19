@@ -1,11 +1,5 @@
-"use client";
-
-import PageContent from "./content/PageContent";
+import HomeView from "@/components/views/HomeView";
 
 export default function Home() {
-  return (
-    <div>
-      <PageContent />
-    </div>
-  );
+  return <HomeView />;
 }

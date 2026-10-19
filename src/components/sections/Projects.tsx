@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Folder from "@/src/components/Folder";
+import Folder from "@/components/ui/Folder";
 import Link from "next/link";
 
 type FolderKey = "webapps" | "uidesign" | "school";

@@ -16,7 +16,26 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+
+```
+src/
+├── app/                  # Routes only (Next.js App Router)
+│   ├── layout.tsx        # Root layout, fonts, metadata
+│   ├── page.tsx          # "/"        → HomeView
+│   ├── aboutMe/page.tsx  # "/aboutMe" → AboutView
+│   ├── not-found.tsx
+│   └── globals.css
+├── components/
+│   ├── layout/           # Header, Navigation, Footer (shared page chrome)
+│   ├── sections/         # Page sections: Hero, About, Stack, WorkExperience, Projects, WorkFlow
+│   ├── views/            # Full page compositions used by routes (HomeView, AboutView)
+│   └── ui/               # Reusable building blocks (Folder, LogoLoop, RotatingText, SmoothScroll, IntroOverlay)
+└── lib/                  # Helpers (cn)
+public/assets/            # Images, videos, CV
+```
+
+Imports use the `@/` alias, which points to `src/` (e.g. `import Header from "@/components/layout/Header"`).
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
