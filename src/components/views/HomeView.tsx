@@ -1,15 +1,15 @@
 "use client";
 
-import SmoothScroll from "@/src/components/SmoothScroll";
-import Header from "../layout/Header";
-import Hero from "../layout/Hero";
-import Stack from "../roadMap/StackSection";
-import ExperienceRoadmap from "../roadMap/WorkExperience";
-import Projects from "../roadMap/ProjectExperience";
-import About from "../aboutMe/AboutMe";
-import Footer from "../layout/Footer";
+import SmoothScroll from "@/components/ui/SmoothScroll";
+import Header from "@/components/layout/Header";
+import Hero from "@/components/sections/Hero";
+import Stack from "@/components/sections/Stack";
+import ExperienceRoadmap from "@/components/sections/WorkExperience";
+import Projects from "@/components/sections/Projects";
+import About from "@/components/sections/About";
+import Footer from "@/components/layout/Footer";
 
-export default function PageContent() {
+export default function HomeView() {
   return (
     <SmoothScroll>
       <div className="bg-[#FAFAFA] min-h-[200vh] text-white selection:bg-blue-500/30">

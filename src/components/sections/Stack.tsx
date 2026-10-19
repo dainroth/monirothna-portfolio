@@ -1,5 +1,5 @@
 "use client";
-import LogoLoop from "@/src/components/LogoLoop";
+import LogoLoop from "@/components/ui/LogoLoop";
 import Image from "next/image";
 import {
   SiReact,
