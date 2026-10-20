@@ -12,6 +12,42 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Brand palette + display type (generates bg-cream, text-navy, font-display, ...) */
+@theme {
+  --color-ink: #1a1410;
+  --color-cream: #fcf9f3;
+  --color-paper: #f7f5f0;
+  --color-navy: #1a2b56;
+  --color-tang: #e8742c;
+  --color-sky: #4464a8;
+  --color-sun: #ffd23f;
+  --color-blush: #ff8fab;
+  --color-mute: #5a5047;
+  --font-display: var(--font-bricolage), var(--font-geist-sans), sans-serif;
+}
+
+/* Recurring motifs */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(26 43 86 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(26 43 86 / 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@utility shadow-brutal {
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+@utility shadow-brutal-lg {
+  box-shadow: 8px 8px 0 0 var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
