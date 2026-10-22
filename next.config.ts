@@ -8,14 +8,10 @@ const withBundleAnalyzer = createBundleAnalyzer({
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "i.pinimg.com",
-        port: "",
-        pathname: "/**",
-      },
-    ],
+  },
+  async redirects() {
+    // The about page used to live at /aboutMe; keep old shared links working.
+    return [{ source: "/aboutMe", destination: "/about", permanent: true }];
   },
   experimental: {
     optimizeCss: true,

@@ -6,6 +6,8 @@ import {
   Geist_Mono,
 } from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/components/ui/PageTransition";
+import { siteDescription, siteName, siteUrl } from "@/data/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +39,18 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Sakhan Monirothna portfolio",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} — Developer & Designer`,
+    template: `%s — ${siteName}`,
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    siteName,
+    locale: "en_US",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -58,6 +71,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <PageTransition />
       </body>
     </html>
   );
