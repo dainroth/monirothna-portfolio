@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
-import { Comic_Relief, Geist, Geist_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Comic_Relief,
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/components/ui/PageTransition";
+import { siteDescription, siteName, siteUrl } from "@/data/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,8 +31,26 @@ const comicRelief = Comic_Relief({
   preload: true,
 });
 
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
+
 export const metadata: Metadata = {
-  title: "Sakhan Monirothna portfolio",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} — Developer & Designer`,
+    template: `%s — ${siteName}`,
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    siteName,
+    locale: "en_US",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -34,7 +59,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${comicRelief.variable} ${geistSans.variable}`}>
+    <html
+      lang="en"
+      className={`${comicRelief.variable} ${geistSans.variable} ${bricolage.variable}`}
+    >
       <head>
         <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/icon.png" />
@@ -43,6 +71,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <PageTransition />
       </body>
     </html>
   );
