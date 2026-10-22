@@ -1,206 +1,150 @@
 "use client";
-import { motion } from "framer-motion";
-import { SiGithub, SiTelegram, SiDiscord, SiGmail } from "react-icons/si";
-import { FaLinkedinIn } from "react-icons/fa";
-import React from "react";
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  const [localTime, setLocalTime] = React.useState<string>("");
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { FiArrowUpRight, FiCheck, FiCopy } from "react-icons/fi";
+import { email, socialLinks } from "@/data/socials";
 
-  React.useEffect(() => {
-    const update = () => {
+// Sticky-note colors + tilts for the social cards (email has its own button).
+const notes = socialLinks
+  .filter((s) => !s.url.startsWith("mailto:"))
+  .map((s, i) => ({
+    ...s,
+    bg: ["#F2CF63", "#F2A7B8", "#9FD8C2", "#A9C1EE"][i % 4],
+    tilt: [-4, 3, -2, 5][i % 4],
+  }));
+
+export default function Footer() {
+  const reduce = useReducedMotion();
+  const [localTime, setLocalTime] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const update = () =>
       setLocalTime(
-        new Date().toLocaleTimeString("en-KH", {
+        new Date().toLocaleTimeString("en-GB", {
           hour: "2-digit",
           minute: "2-digit",
+          timeZone: "Asia/Phnom_Penh",
         }),
       );
-    };
     update();
-    const interval = setInterval(update, 1000 * 60); // update every minute
-    return () => clearInterval(interval);
+    const id = setInterval(update, 30_000);
+    return () => clearInterval(id);
   }, []);
 
-  const socialLinks = [
-    {
-      name: "GitHub",
-      icon: <SiGithub />,
-      url: "https://github.com/dainroth",
-      color: "#fff",
-    },
-    {
-      name: "LinkedIn",
-      icon: <FaLinkedinIn />,
-      url: "https://www.linkedin.com/in/monirothna-sakhan-318b922a0",
-      color: "#0077B5",
-    },
-    {
-      name: "Discord",
-      icon: <SiDiscord />,
-      url: "https://discordapp.com/users/922518151374200843",
-      color: "#5865F2",
-    },
-    {
-      name: "Telegram",
-      icon: <SiTelegram />,
-      url: "https://t.me/dainroth",
-      color: "#229ED9",
-    },
-    {
-      name: "Gmail",
-      icon: <SiGmail />,
-      url: "mailto:rothanaemily@gmail.com",
-      color: "#EA4335",
-    },
-  ];
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  };
 
   return (
-    <footer className="bg-[#1a2b56] text-[#F7F5F0] pt-20 pb-12 px-4 sm:px-6 lg:px-8 rounded-t-[2.5rem] mt-20">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20 mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-1 space-y-6"
+    <footer className="relative overflow-hidden rounded-t-[2.5rem] bg-ink text-cream">
+      <div className="mx-auto max-w-6xl px-4 pt-24 sm:px-6 md:pt-32">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-pop">
+          Contact
+        </p>
+
+        <h2 className="mt-4 font-display text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl md:text-8xl">
+          Got an idea?
+          <br />
+          Let&apos;s{" "}
+          <span className="relative inline-block text-sun">
+            build it.
+            <svg
+              aria-hidden
+              viewBox="0 0 300 24"
+              preserveAspectRatio="none"
+              className="absolute -bottom-2 left-0 h-4 w-full md:-bottom-3 md:h-6"
+            >
+              <motion.path
+                d="M4 16 C 60 4, 120 22, 180 10 S 270 8, 296 14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="6"
+                strokeLinecap="round"
+                initial={{ pathLength: reduce ? 1 : 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, delay: 0.3, ease: "easeInOut" }}
+              />
+            </svg>
+          </span>
+        </h2>
+
+        <div className="mt-12 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <button
+            onClick={copyEmail}
+            className="group inline-flex w-fit items-center gap-3 rounded-full border-2 border-cream bg-cream px-6 py-4 font-display text-lg font-semibold text-ink transition-all hover:-translate-y-0.5 hover:bg-sun md:text-xl"
+            aria-label={`Copy email address ${email}`}
           >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif tracking-tighter leading-tight">
-              If it doesn&apos;t
-              <span className="italic font-serif block">spark joy</span>
-              I&apos;m not done.
-            </h2>
-            <p className="text-[#F7F5F0]/70 text-sm sm:text-base leading-relaxed font-comic-relief max-w-sm">
-              I enjoy good conversations, quiet moments with music, and the kind
-              of talks that linger. Maybe we’ll share one over coffee someday
-            </p>
-          </motion.div>
-
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16">
-            {/* Connect Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-6"
-            >
-              <p className="font-comic-relief text-xs sm:text-sm tracking-widest uppercase opacity-50 font-medium">
-                Connect
-              </p>
-              <ul className="space-y-4">
-                {socialLinks.slice(0, 3).map((link, i) => {
-                  // const Icon = link.icon;
-                  return (
-                    <motion.li
-                      key={link.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 + i * 0.05 }}
-                    >
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-sm sm:text-base font-medium hover:text-[#8fb3e2] font-comic-relief transition-colors duration-300 group"
-                      >
-                        <span className="w-5 h-5 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
-                          {/* <Icon size={20} strokeWidth={1.5} /> */}
-                          {link.icon}
-                        </span>
-                        {link.name}
-                      </a>
-                    </motion.li>
-                  );
-                })}
-              </ul>
-            </motion.div>
-
-            {/* direct Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <p className="font-comic-relief text-xs sm:text-sm tracking-widest uppercase opacity-50 font-medium">
-                Direct
-              </p>
-              <ul className="space-y-4">
-                {socialLinks.slice(3).map((link, i) => {
-                  // const Icon = link.icon;
-                  return (
-                    <motion.li
-                      key={link.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.15 + i * 0.05 }}
-                    >
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-sm sm:text-base font-medium hover:text-[#8fb3e2] font-comic-relief transition-colors duration-300 group"
-                      >
-                        <span className="w-5 h-5 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
-                          {link.icon}
-                          {/* <Icon size={20} strokeWidth={1.5} /> */}
-                        </span>
-                        {link.name}
-                      </a>
-                    </motion.li>
-                  );
-                })}
-              </ul>
-            </motion.div>
-          </div>
+            <span className="break-all">{copied ? "Copied to clipboard" : email}</span>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-cream">
+              {copied ? <FiCheck /> : <FiCopy className="transition-transform group-hover:scale-110" />}
+            </span>
+          </button>
+          <p className="max-w-xs text-sm leading-relaxed text-cream/60">
+            If it doesn&apos;t spark joy, I&apos;m not done. Freelance, full-time
+            or just a chat over coffee — my inbox is open.
+          </p>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-linear-to-r from-white/0 via-white/10 to-white/0 mb-8" />
+        {/* Socials as sticky notes */}
+        <ul className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+          {notes.map((note, i) => (
+            <motion.li
+              key={note.name}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, rotate: 0 }}
+              whileInView={{ opacity: 1, y: 0, rotate: reduce ? 0 : note.tilt }}
+              whileHover={reduce ? undefined : { rotate: 0, y: -8 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ type: "spring", stiffness: 160, damping: 15, delay: i * 0.06 }}
+            >
+              <a
+                href={note.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex aspect-square flex-col justify-between p-4 text-ink shadow-[6px_6px_0_rgba(0,0,0,0.35)] md:p-5"
+                style={{ backgroundColor: note.bg }}
+              >
+                <div className="flex items-start justify-between">
+                  <note.icon className="text-2xl md:text-3xl" />
+                  <FiArrowUpRight className="text-xl transition-transform duration-300 group-hover:rotate-45" />
+                </div>
+                <div>
+                  <p className="font-display text-xl font-bold md:text-2xl">{note.name}</p>
+                  <p className="mt-0.5 truncate text-xs text-ink/70 md:text-sm">{note.handle}</p>
+                </div>
+              </a>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
 
-        {/* Footer Bottom */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col items-center sm:items-start gap-1 order-2 sm:order-1"
+      {/* Giant wordmark, cut off by the bottom edge */}
+      <div aria-hidden className="mt-20 flex select-none justify-center overflow-hidden leading-[0.75]">
+        {"ROTH".split("").map((ch, i) => (
+          <motion.span
+            key={i}
+            whileHover={reduce ? undefined : { y: "-12%", color: ["#F2CF63", "#F2A7B8", "#9FD8C2", "#3355D6"][i] }}
+            transition={{ type: "spring", stiffness: 400, damping: 12 }}
+            className="translate-y-[18%] font-display text-[34vw] font-extrabold tracking-tighter text-cream/10 md:text-[30vw]"
           >
-            <p className="font-mono tracking-widest uppercase opacity-50">
-              Phnom Penh, Cambodia
-            </p>
-            <p className="opacity-40 text-[11px]">
-              Local Time: {localTime && `${localTime} ICT`}
-            </p>
-          </motion.div>
+            {ch}
+          </motion.span>
+        ))}
+      </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.35 }}
-            className="font-mono tracking-widest uppercase opacity-50 order-3 sm:order-2"
-          >
-            © {currentYear} Sakhan Monirothna
-          </motion.p>
-
-          <motion.button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            whileHover={{ y: -3 }}
-            whileTap={{ y: 0 }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="font-mono text-[11px] tracking-widest uppercase border border-white/20 px-4 py-2 rounded-full hover:bg-white/5 hover:border-white/40 transition-all duration-300 order-1 sm:order-3"
-          >
-            Back to Top ↑
-          </motion.button>
+      <div className="relative border-t border-cream/10 bg-ink">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50 sm:flex-row sm:px-6">
+          <p>
+            Phnom Penh · {localTime ? `${localTime} ICT` : "—"}
+          </p>
+          <p>© {new Date().getFullYear()} Sakhan Monirothna</p>
         </div>
       </div>
     </footer>

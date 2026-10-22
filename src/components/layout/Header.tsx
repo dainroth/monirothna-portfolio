@@ -1,9 +1,8 @@
 "use client";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
-import Link from "next/link";
 import { ArrowBigUpDashIcon } from "lucide-react";
-import Navbar from "./Navigation";
+import Navbar from "./SiteNav";
 
 export default function Header() {
   const { scrollY } = useScroll();
@@ -35,7 +34,9 @@ export default function Header() {
           opacity: showBackToTop ? 1 : 0,
         }}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 w-12 h-12 md:w-14 md:h-14 bg-[#1a2b56] border-4 border-[#2D2D2D] rounded-full shadow-[4px_4px_0px_0px_rgba(45,45,45,1)] flex items-center justify-center text-white text-xl md:text-2xl hover:translate-y-1 active:translate-y-0 transition-transform"
+        aria-label="Back to top"
+        tabIndex={showBackToTop ? 0 : -1}
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 w-12 h-12 md:w-14 md:h-14 bg-navy border-2 border-ink rounded-full shadow-brutal flex items-center justify-center text-cream text-xl md:text-2xl hover:translate-y-1 active:translate-y-0 transition-transform"
       >
         <ArrowBigUpDashIcon />
       </motion.button>
