@@ -5,6 +5,8 @@ import {
   Geist,
   Geist_Mono,
 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import PageTransition from "@/components/ui/PageTransition";
 import { siteDescription, siteName, siteUrl } from "@/data/site";
@@ -73,6 +75,8 @@ export default function RootLayout({
       >
         {children}
         <PageTransition />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
