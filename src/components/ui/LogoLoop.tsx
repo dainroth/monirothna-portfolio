@@ -194,14 +194,27 @@ const useAnimationLoop = (
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
+    const stop = () => {
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
       lastTimestampRef.current = null;
+    };
+
+    // Only spend frames on the ticker while it's actually on screen.
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (rafRef.current === null) rafRef.current = requestAnimationFrame(animate);
+      } else {
+        stop();
+      }
+    });
+    observer.observe(track);
+
+    return () => {
+      observer.disconnect();
+      stop();
     };
   }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical]);
 };

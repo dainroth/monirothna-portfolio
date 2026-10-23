@@ -8,8 +8,8 @@ import RotatingText from "@/components/ui/RotatingText";
 import CanvasCursor from "@/components/ui/CanvasCursor";
 
 const SELECT = "#3b82f6"; // Figma-style selection blue
-const DRAG_START = 0.6;
-const DRAG_DURATION = 1.5;
+const DRAG_START = 0.3;
+const DRAG_DURATION = 1.1;
 const DRAG_END = DRAG_START + DRAG_DURATION;
 const dragEase = [0.65, 0, 0.35, 1] as const;
 
@@ -102,13 +102,35 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Selection rectangle that grows from the top-left corner */}
-          <motion.div
-            aria-hidden
-            {...drag({ width: "0%", height: "0%", opacity: 1 }, { width: "100%", height: "100%", opacity: 1 })}
-            className="pointer-events-none absolute left-0 top-0"
-            style={{ border: `1.5px solid ${SELECT}`, backgroundColor: "transparent" }}
-          >
+          {/* Selection rectangle that grows from the top-left corner. Each edge moves with
+              transforms only, so the browser doesn't re-lay out the page every frame. */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <motion.span
+              {...drag({ scaleX: 0 }, { scaleX: 1 })}
+              className="absolute left-0 top-0 h-[1.5px] w-full origin-left"
+              style={{ backgroundColor: SELECT }}
+            />
+            <motion.span
+              {...drag({ scaleY: 0 }, { scaleY: 1 })}
+              className="absolute left-0 top-0 h-full w-[1.5px] origin-top"
+              style={{ backgroundColor: SELECT }}
+            />
+            {/* Right and bottom edges ride along with the cursor */}
+            <motion.div {...drag({ x: "-100%" }, { x: "0%" })} className="absolute inset-0">
+              <motion.span
+                {...drag({ scaleY: 0 }, { scaleY: 1 })}
+                className="absolute right-0 top-0 h-full w-[1.5px] origin-top"
+                style={{ backgroundColor: SELECT }}
+              />
+            </motion.div>
+            <motion.div {...drag({ y: "-100%" }, { y: "0%" })} className="absolute inset-0">
+              <motion.span
+                {...drag({ scaleX: 0 }, { scaleX: 1 })}
+                className="absolute bottom-0 left-0 h-[1.5px] w-full origin-left"
+                style={{ backgroundColor: SELECT }}
+              />
+            </motion.div>
+
             {["-left-1.5 -top-1.5", "-right-1.5 -top-1.5", "-left-1.5 -bottom-1.5", "-right-1.5 -bottom-1.5"].map((pos, i) => (
               <motion.span
                 key={pos}
@@ -119,7 +141,7 @@ export default function Hero() {
                 style={{ borderColor: SELECT }}
               />
             ))}
-          </motion.div>
+          </div>
 
           {/* Fake multiplayer cursor doing the dragging */}
           {!reduce && <DragCursor />}
@@ -129,15 +151,18 @@ export default function Hero() {
   );
 }
 
-/** Cursor appears at the top-left, drags to the bottom-right, then drifts off and idles. */
+/**
+ * Cursor appears at the top-left, drags to the bottom-right, then drifts off and idles.
+ * The wrapper is frame-sized, so translating it by % moves the cursor across the frame.
+ */
 function DragCursor() {
   return (
     <motion.div
-      className="pointer-events-none absolute z-20"
-      initial={{ left: "0%", top: "0%", opacity: 0 }}
+      className="pointer-events-none absolute inset-0 z-20"
+      initial={{ x: "0%", y: "0%", opacity: 0 }}
       animate={{
-        left: ["0%", "0%", "100%", "104%"],
-        top: ["0%", "0%", "100%", "108%"],
+        x: ["0%", "0%", "100%", "104%"],
+        y: ["0%", "0%", "100%", "108%"],
         opacity: [0, 1, 1, 1],
       }}
       transition={{
@@ -147,6 +172,7 @@ function DragCursor() {
       }}
     >
       <motion.div
+        className="absolute left-0 top-0"
         animate={{ x: [0, 6, 0], y: [0, -4, 0] }}
         transition={{ delay: DRAG_END + 0.6, duration: 3, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -285,7 +311,8 @@ function Sticker({
       whileHover={reduce ? undefined : { scale: 1.03 }}
       initial={reduce ? { rotate: item.rotate } : { opacity: 0, scale: 0.3, rotate: item.rotate - 20 }}
       animate={{ opacity: 1, scale: 1, rotate: item.rotate }}
-      transition={{ delay: reduce ? 0 : DRAG_END + 0.1 + index * 0.12, type: "spring", stiffness: 260, damping: 16 }}
+      // Pops in while the frame is still being drawn, so the hero is complete sooner (better LCP).
+      transition={{ delay: reduce ? 0 : DRAG_START + 0.2 + index * 0.08, type: "spring", stiffness: 260, damping: 16 }}
       style={{ zIndex: z }}
       className={`absolute cursor-grab active:cursor-grabbing ${item.className}`}
     >
@@ -297,7 +324,7 @@ function Sticker({
           width={320}
           height={320}
           draggable={false}
-          priority={index < 2}
+          priority
           sizes="(min-width: 768px) 260px, 50vw"
           className="pointer-events-none h-auto w-full select-none object-contain"
         />

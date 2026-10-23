@@ -14,18 +14,13 @@ export default function SmoothScroll({
     let idleCallbackId: number | undefined;
 
     const initLenis = () => {
-      const lenis = new Lenis({
+      // autoRaf lets Lenis run its own frame loop, which destroy() stops. A hand-rolled
+      // requestAnimationFrame loop kept running after leaving the page, piling up one per visit.
+      lenisRef.current = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        autoRaf: true,
       });
-      lenisRef.current = lenis;
-
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
     };
 
     // Defer Lenis initialization to reduce TBT

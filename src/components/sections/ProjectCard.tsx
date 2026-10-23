@@ -65,7 +65,6 @@ export default function ProjectCard({
         <ProjectCover
           project={project}
           sizes="(min-width: 768px) 50vw, 100vw"
-          priority={index < 2}
           className="transition-transform duration-700 ease-out group-hover:scale-105"
           badge={badge}
         />
