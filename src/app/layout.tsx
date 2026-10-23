@@ -28,7 +28,8 @@ const comicRelief = Comic_Relief({
   subsets: ["latin"],
   weight: "400",
   display: "swap",
-  preload: true,
+  // Only the About page polaroid uses it, so don't make every page download it first.
+  preload: false,
 });
 
 const bricolage = Bricolage_Grotesque({
